@@ -1,0 +1,11 @@
+﻿  main.cpp
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\Window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\Window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(480): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(484): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(488): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(492): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(1436): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(1789): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Compu_Grafica\Proyecto2020\Project1\Project1\main.cpp(205): warning C4715: 'leerArchivo': no todas las rutas de acceso de control devuelven un valor
+  Project1.vcxproj -> C:\Compu_Grafica\Proyecto2020\Project1\Debug\Practica1.exe
