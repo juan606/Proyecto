@@ -90,6 +90,7 @@ Texture Mar;
 Texture Mensaje;
 Texture PizzaTex;
 Texture RocaTex;
+Texture Techo;
 //materiales
 Material Material_brillante;
 Material Material_opaco;
@@ -127,6 +128,7 @@ Model Barco;
 Model Marco;
 Model Puerta;
 Model Regalo;
+Model Dulces;
 Model TRICERTP;
 Skybox skybox;
 
@@ -629,6 +631,14 @@ void DisplayHouse(glm::mat4 model, GLuint uniformModel, GLuint uniformSpecularIn
 	Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 	meshList[1]->RenderMesh();
 
+	//techo
+	model = glm::mat4(1.0);
+	model = glm::translate(model, glm::vec3(0.0f, 13.0f, 0.0f));
+	model = glm::scale(model, glm::vec3(2.5f, 1.0f, 2.5f));
+	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	paredLadrillo2Texture.UseTexture();
+	Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+	meshList[1]->RenderMesh();
 	//pared 1 ofrenda
 	model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(0.0f, 5.0f, 25.0f));
@@ -732,6 +742,15 @@ void DisplayHouse(glm::mat4 model, GLuint uniformModel, GLuint uniformSpecularIn
 
 	modelCuarto2= glm::mat4(1.0);
 	modelCuarto2 = glm::translate(modelCuarto2, glm::vec3(90.0f, 0.0f, 90.0f));
+
+	//techo
+	model = modelCuarto2;
+	model = glm::translate(model, glm::vec3(0.0f, 13.0f, 0.0f));
+	model = glm::scale(model, glm::vec3(2.5f, 1.0f, 2.5f));
+	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	paredLadrillo2Texture.UseTexture();
+	Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+	meshList[1]->RenderMesh();
 
 	//plano piso
 	model = modelCuarto2;
@@ -1627,6 +1646,8 @@ int main()
 	pecebre.LoadTextureA();
 	Mar = Texture("Textures/mar.tga");
 	Mar.LoadTextureA();
+	/*Techo = Texture("Textures/tec.png");
+	Techo.LoadTextureA();*/
 
 	Mensaje = Texture("Textures/mensaje.png");
 	Mensaje.LoadTextureA();
@@ -1682,11 +1703,11 @@ int main()
 	MesaC = Model();
 	MesaC.LoadModel("Models/mesa.obj");
 
-	Cama = Model();
+	/*Cama = Model();
 	Cama.LoadModel("Models/cama.obj");
 
 	Cama2 = Model();
-	Cama2.LoadModel("Models/cama2.obj");
+	Cama2.LoadModel("Models/cama2.obj");*/
 
 	Comedor = Model();
 	Comedor.LoadModel("Models/comedor.obj");
@@ -1726,6 +1747,8 @@ int main()
 	Regalo = Model();
 	Regalo.LoadModel("Models/regalo.obj");
 
+	//Dulces = Model();
+	//Dulces.LoadModel("Models/dulces.obj");
 
 	//pruebas
 	TRICERTP = Model();
@@ -1956,7 +1979,72 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			Canasta.RenderModel();
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.2f, 1.0f, -0.4f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
+			//Canasta con camara
+			model =	modelJerarquico ;
+			model = glm::translate(model, glm::vec3(-0.6f, 1.0f, -0.4f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.4f, 1.0f, -0.4f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
+			
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.8f, 1.0f, -0.4f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.2f, 1.0f, -0.8f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.6f, 1.0f, -0.8f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.4f, 1.0f, -0.8f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
 
+			//Canasta con camara
+			model = modelJerarquico;
+			model = glm::translate(model, glm::vec3(-0.8f, 1.0f, -0.8f));
+			//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			Dulce.RenderModel();
 			//añadir mas objetos de forma jerarquica a la canasta
 		}
 
