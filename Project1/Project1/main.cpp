@@ -1875,10 +1875,11 @@ int main()
 			camera.keyControlFree(mainWindow.getsKeys(), deltaTime);
 		}
 		bool aux_Luz=true;
-		if (mainWindow.getsKeys()[GLFW_KEY_V]) {
+		if (mainWindow.getsKeys()[GLFW_KEY_M]) {
 			auxLuz = 0;
 			auxLux1 = 0;
 			auxLux2 = 0;
+			pointLightCount = 0;
 
 		}
 		if (mainWindow.getsKeys()[GLFW_KEY_Z]) {
