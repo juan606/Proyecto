@@ -131,6 +131,11 @@ Model Regalo;
 Model Dulces;
 Model TRICERTP;
 Skybox skybox;
+Skybox nocheskybox;
+
+//int
+int banderaSkybox = 0;
+int dia = 0;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -1669,7 +1674,7 @@ int main()
 	Roca.LoadModel("Models/Pizza.obj");
 
 	Pizza = Model();
-	Pizza.LoadModel("Models/Pizza1.obj");
+	Pizza.LoadModel("Models/Corona.obj");
 
 	Pan = Model();
 	Pan.LoadModel("Models/Pan.obj");
@@ -1798,17 +1803,44 @@ int main()
 	skyboxFaces.push_back("Textures/Skybox/hills_up.tga");
 	skyboxFaces.push_back("Textures/Skybox/hills_rt.tga");
 	skyboxFaces.push_back("Textures/Skybox/hills_lf.tga");
-
 	skybox = Skybox(skyboxFaces);
+
+	std::vector<std::string> skyboxFacesNoche;
+	skyboxFacesNoche.push_back("Textures/Skybox/moon/moon_base1.jpg");
+	skyboxFacesNoche.push_back("Textures/Skybox/moon/moon_base5.jpg");
+	skyboxFacesNoche.push_back("Textures/Skybox/moon/moon_base3.jpg");
+	skyboxFacesNoche.push_back("Textures/Skybox/moon/moon_base4.jpg");
+	skyboxFacesNoche.push_back("Textures/Skybox/moon/moon_base2.jpg");
+	skyboxFacesNoche.push_back("Textures/Skybox/moon/moon_base6.jpg");
+
+	nocheskybox = Skybox(skyboxFacesNoche);
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 300.0f);
 
-
+	int auxLuz = 0;
+	int auxLux1 = 0;
+	int auxLux2 = 0;
 	//Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
+
+		//skybox 
+		if (dia <= 600) {
+			dia++;
+			banderaSkybox = 0;
+
+		}
+		if (dia > 600 && dia <= 1200) {
+			dia++;
+			banderaSkybox = 1;
+		}
+		if (dia > 1200) {
+			dia = 0;
+		}
+
+		/***********************/
 		GLfloat now = glfwGetTime();
 		deltaTime = now - lastTime;
 		lastTime = now;
@@ -1843,7 +1875,30 @@ int main()
 			camera.keyControlFree(mainWindow.getsKeys(), deltaTime);
 		}
 		bool aux_Luz=true;
-		if (mainWindow.getLuz()) {
+		if (mainWindow.getsKeys()[GLFW_KEY_V]) {
+			auxLuz = 0;
+			auxLux1 = 0;
+			auxLux2 = 0;
+
+		}
+		if (mainWindow.getsKeys()[GLFW_KEY_Z]) {
+			auxLuz = 10;
+			auxLux1 = 0;
+			auxLux2 = 0;
+		}
+
+		if (mainWindow.getsKeys()[GLFW_KEY_X]) {
+			auxLuz = 0;
+			auxLux1 = 10;
+			auxLux2 = 0;
+			
+		}
+		if (mainWindow.getsKeys()[GLFW_KEY_C]) {
+			auxLuz = 0;
+			auxLux1 = 0;
+			auxLux2 = 10;
+		}
+		if (auxLuz>0) {
 			pointLightCount = 0;
 			pointLights[0] = PointLight(1.0f, 2.0f, 0.0f,
 				0.0f, 1.0f,
@@ -1856,51 +1911,47 @@ int main()
 				-5.5f, 0.0f, 15.0f,
 				0.1f, 0.1f, 0.1f);
 			pointLightCount++;
-
-			aux_Luz = true;
-
 		}
-		else {
+		if (auxLux1>0)
+		{
+			pointLightCount = 0;
+			pointLights[0] = PointLight(2.0f, 2.0f, 2.0f,
+				0.0f, 1.0f,
+				108.0f, 3.0f, 83.0f,
+				0.1f, 0.1f, 0.1f);
+			pointLightCount++;
 
-			if (mainWindow.getLuz2()) {
-				pointLightCount = 0;
-				pointLights[0] = PointLight(2.0f, 2.0f, 2.0f,
-					0.0f, 1.0f,
-					108.0f, 3.0f, 83.0f,
-					0.1f, 0.1f, 0.1f);
-				pointLightCount++;
-
-				pointLights[1] = PointLight(2.0f, 2.0f, 2.0f,
-					0.0f, 1.0f,
-					72.0f, 3.0f, 76.0f,
-					0.1f, 0.1f, 0.1f);
-				pointLightCount++;
-				aux_Luz = false;
-
-			}
-			else 
-			{
-				pointLightCount = 0;
-				pointLights[0] = PointLight(2.0f, 2.0f, 2.0f,
-					0.0f, 1.0f,
-					18.0f, 3.0f, -7.0f,
-					0.1f, 0.1f, 0.1f);
-				pointLightCount++;
-
-				pointLights[1] = PointLight(2.0f, 2.0f, 2.0f,
-					0.0f, 1.0f,
-					-18.0f, 3.0f, -14.0f,
-					0.1f, 0.1f, 0.1f);
-				pointLightCount++;
-
-
-				pointLights[2] = PointLight(2.0f, 2.0f, 2.0f,
-					0.0f, 1.0f,
-					-18.0f, 3.0f, 14.0f,
-					0.1f, 0.1f, 0.1f);
-				pointLightCount++;
-			}
+			pointLights[1] = PointLight(2.0f, 2.0f, 2.0f,
+				0.0f, 1.0f,
+				72.0f, 3.0f, 76.0f,
+				0.1f, 0.1f, 0.1f);
+			pointLightCount++;
+			aux_Luz = false;
 		}
+		if (auxLux2>0)
+		{
+			pointLightCount = 0;
+			pointLights[0] = PointLight(2.0f, 2.0f, 2.0f,
+				0.0f, 1.0f,
+				18.0f, 3.0f, -7.0f,
+				0.1f, 0.1f, 0.1f);
+			pointLightCount++;
+
+			pointLights[1] = PointLight(2.0f, 2.0f, 2.0f,
+				0.0f, 1.0f,
+				-18.0f, 3.0f, -14.0f,
+				0.1f, 0.1f, 0.1f);
+			pointLightCount++;
+
+
+			pointLights[2] = PointLight(2.0f, 2.0f, 2.0f,
+				0.0f, 1.0f,
+				-18.0f, 3.0f, 14.0f,
+				0.1f, 0.1f, 0.1f);
+			pointLightCount++;
+		}
+
+		
 
 		/*if (!mainWindow.getLuz2()) {
 			pointLightCount = 0;
@@ -1919,11 +1970,19 @@ int main()
 		
 		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 
+		
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+
+		if (banderaSkybox == 0) {
+			skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+		if (banderaSkybox == 1) {
+			nocheskybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+		//skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
